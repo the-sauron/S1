@@ -6,8 +6,8 @@ const TITLES = [
   "AI Explorer",
   "Web Developer",
   "Freelancer",
-  "Gamer",
   "Tech Blogger",
+  "Gamer"
 ];
 
 export const Corousal = ({ pxPerSec = 60, direction = "rtl" }) => {

@@ -16,7 +16,7 @@ export default function Hero({
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-white dark:bg-neutral-950">
+    <section id='hero-section' className="relative overflow-hidden  ">
       {/* Removed all inline keyframes and animation classes */}
 
       {/* Red theme Circle background accents */}
@@ -62,6 +62,10 @@ export default function Hero({
 
       <div className="flex justify-center w-full mb-20 mt-10">
         <Corousal speedSec={20} />
+      </div>
+
+      <div>
+            
       </div>
     </section>
   );
