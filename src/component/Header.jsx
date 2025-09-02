@@ -22,6 +22,14 @@ export const Header = () => {
     }
     setNavOpen(false);
   };
+  // Scroll to About section
+  const scrollToAbout = () => {
+    const el = document.getElementById("about-section");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+    setNavOpen(false);
+  }
 
   return (
     <div className="sticky top-0 z-50 mb-4">
@@ -70,7 +78,9 @@ export const Header = () => {
 
         {/* About section for desktop */}
         <div className="hidden md:block ml-4">
-          <span className="rounded-md px-2 py-1 transition hover:text-white hover:cursor-pointer">
+          <span className="rounded-md px-2 py-1 transition hover:text-white hover:cursor-pointer"
+          onClick={scrollToAbout}
+          >
             About
           </span>
         </div>
@@ -106,17 +116,22 @@ export const Header = () => {
             Products
           </div>
           <div
-            onClick={() => setNavOpen(false)}
+            onClick={scrollToAbout}
             className="w-full max-w-sm rounded-lg border border-red-500/20 bg-white/5 px-4 py-3 text-center text-rose-100/95 shadow-sm transition-all duration-300 ease-out hover:border-red-500/40 hover:bg-rose-600/10 hover:scale-105"
             style={{
               transitionDelay: navOpen ? '350ms' : '0ms',
               transform: navOpen ? 'translateX(0)' : 'translateX(-100px)',
               opacity: navOpen ? 1 : 0
             }}
+            
           >
             About
           </div>
         </div>
+      </div>
+
+      <div className="flex justify-center w-full h-[1px] bg-red-700">
+
       </div>
     </div>
   );

@@ -7,7 +7,8 @@ const TITLES = [
   "Web Developer",
   "Freelancer",
   "Tech Blogger",
-  "Gamer"
+  "Gamer",
+  "Video Editor",
 ];
 
 export const Corousal = ({ pxPerSec = 60, direction = "rtl" }) => {
