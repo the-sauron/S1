@@ -6,7 +6,7 @@ export default function About() {
       <div className="max-w-5xl mx-auto px-6">
         <h2 className="text-3xl font-extrabold text-red-500 mb-4">About Me</h2>
         <p className="text-lg text-gray-200 leading-relaxed mb-6">
-          Im The Sauron — a practical digital creator focused on building real products, sharing
+          I'm The Sauron — a practical digital creator & software Engineer focused on building real products, sharing
           clear technical breakdowns, and helping people choose the right tools. I combine hands-on
           development experience with design sensibility to deliver polished, reliable results.
         </p>

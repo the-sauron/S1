@@ -29,7 +29,7 @@ export const Footer = () => {
             <h3 className="text-2xl font-bold mb-4 text-red-500">Services</h3>
             <ul className="space-y-2">
               <li>
-                <a target='__blank' href="https://topmate.io/the_sauron/1693712?utm_source=public_profile&utm_campaign=the_sauron" className="text-gray-300 hover:text-white hover:underline transition-colors">
+                <a target='__blank' href="https://topmate.io/the_sauron/1706299?utm_source=public_profile&utm_campaign=the_sauron" className="text-gray-300 hover:text-white hover:underline transition-colors">
                   Video Editing
                 </a>
               </li>
