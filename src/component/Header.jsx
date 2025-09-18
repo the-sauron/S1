@@ -32,8 +32,8 @@ export const Header = () => {
   }
 
   return (
-    <div className="sticky top-0 z-50 mb-4">
-      <div className="md:mx-20 mx-[4px] pt-[10px] pb-4  backdrop-blur-lg flex items-center font-mono text-white text-xl font-semibold">
+    <div className="sticky top-0 z-50 ">
+      <div className="md:mx-20 mx-[4px] pt-[10px] pb-4  backdrop-blur-lg flex justify-center items-center font-mono text-white text-xl font-semibold">
         {/* main Logo */}
         <div
           onClick={scrollToHero}
@@ -130,9 +130,8 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className="flex justify-center w-full h-[1px] bg-red-700">
-
-      </div>
+      {/* <div className="flex justify-center w-full h-[1px] bg-red-700">
+      </div> */}
     </div>
   );
 };

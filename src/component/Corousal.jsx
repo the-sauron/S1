@@ -99,13 +99,13 @@ export const Corousal = ({ pxPerSec = 60, direction = "rtl" }) => {
     <div className="md:mx-20 mx-[4px] w-[80%] md:w-[50%] mt-[10px] mb-4 relative flex items-center font-mono text-white">
       {/* Container */}
       <div
-        className="relative w-full overflow-hidden border border-white/10 rounded-xl bg-neutral-950/95 backdrop-blur-xl"
+        className="relative w-full overflow-hidden rounded-xl  backdrop-blur-xl"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
         {/* gradient masks */}
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-12 bg-gradient-to-r from-neutral-950/95 to-transparent z-10" />
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-12 bg-gradient-to-l from-neutral-950/95 to-transparent z-10" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-12  z-10" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-12 5 to-transparent z-10" />
 
         {/* Track: two identical segments rendered side-by-side from the start */}
         <div ref={trackRef} className="flex will-change-transform">
@@ -126,11 +126,11 @@ function Segment({ items, refObj }) {
           className="
             inline-flex items-center justify-center
             shrink-0
-            rounded-lg border border-red-500/20 bg-white/5
+            rounded-lg  bg-white/5
             px-3 sm:px-4
             py-1.5 sm:py-2
              font-semibold leading-[1.15]
-            text-red-700 shadow-sm
+            text-white shadow-sm
             whitespace-nowrap md:text-2xl text-xl
             hover:bg-rose-600/10 hover:border-red-500/40
             transition

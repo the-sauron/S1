@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Corousal } from "./Corousal";
 import styles from './Hero.module.css';
-
+import sauron from "../assets/the-sauron.png";
 export default function Hero({
-  title = "Learn smarter with",
-  highlight = "THE SAURON",
+  tagLine = "Learn smarter with",
+  name = "THE SAURON",
   subtitle = "Digital Creator, Coding tips, tech breakdowns and gadget insights",
 }) {
   // Typewriter removed from subtitle per request.
@@ -16,7 +16,14 @@ export default function Hero({
   }, []);
 
   return (
-    <section id="hero-section" className="relative overflow-hidden  ">
+    <section id="hero-section" className="relative overflow-hidden h-lvh">
+      {/* background image */}
+      <img
+        src={sauron}
+        alt="the sauron background"
+        className="absolute inset-0 m-auto left-0 right-0 top-0 bottom-0 h-full w-full max-w-none opacity-5 object-cover pointer-events-none -z-20"
+      />
+
       {/* Red theme Circle background accents */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -bottom-40 -right-32 h-96 w-96 rounded-full bg-rose-500/20 dark:bg-rose-500/15" />
@@ -24,7 +31,7 @@ export default function Hero({
         <div className="absolute bottom-1/4 right-1/5 size-8 rounded-full bg-rose-400/70 blur-[2px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 pt-24 md:pt-32 ">
+      <div className="relative mx-auto max-w-7xl px-6 pt-24 md:pt-10 ">
         <div className={`${styles.card} flex justify-center md:text-4xl md:mb-[30px]`}>
           <div className={styles.loader}>
             <p className="">So, Who Really Am I?&nbsp;</p>
@@ -44,23 +51,23 @@ export default function Hero({
             Real builds. Real tests. Real talk.
           </span>
 
-          <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-6xl">
-            {title}
+          <h1 className="mt-5 text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-6xl">
+            {tagLine}
           </h1>
 
           {/* Highlighted text */}
-          <div className="my-6 text-4xl sm:text-6xl font-extrabold tracking-tight">
+          <div className="my-6 text-3xl sm:text-4xl font-extrabold tracking-tight">
             <span className="bg-gradient-to-r from-red-600 via-rose-600 to-red-600 bg-clip-text text-transparent">
-              {highlight}
+              {name}
             </span>
           </div>
 
           <p className="mx-auto mt-10   text-neutral-800 dark:text-neutral-200">
             <span
-              className="inline-block rounded-xl border border-red-200/60 bg-gradient-to-r from-rose-50 to-white px-4 py-3 leading-relaxed shadow-sm
+              className="inline-block  px-4 py-3 leading-relaxed shadow-sm
                               dark:border-red-400/20 dark:from-white/5 dark:to-white/0"
             >
-              <span className="md:text-2xl sm:text-xl md:font-bold sm:font-medium text-neutral-900 dark:text-white">
+              <span className="md:text-xltext-lg md:font-bold sm:font-medium text-neutral-900 dark:text-white">
                 {subtitle}
               </span>
             </span>
