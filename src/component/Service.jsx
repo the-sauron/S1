@@ -1,194 +1,245 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export const Services = () => {
-  const animatedRefs = useRef([]);
+  const [activeTab, setActiveTab] = useState(0);
+  const containerRef = useRef(null);
+  const parallaxRef = useRef(null);
+
+  const services = [
+    {
+      title: "Web Development",
+      icon: "💻",
+      shortDesc: "Modern, responsive websites that convert visitors to customers",
+      fullDesc: "Building fast, scalable web applications with cutting-edge technologies tailored to your business needs.",
+      features: ["User-centered design", "FullStack development", "Business websites", "Animated experiences"],
+      link: "https://topmate.io/the_sauron/1693712",
+      color: "from-red-500 to-rose-500"
+    },
+    {
+      title: "Gadget Advice",
+      icon: "📱",
+      shortDesc: "Expert gadget recommendations tailored to your needs",
+      fullDesc: "Get personalized advice on phones, laptops, headphones, and tech accessories that fit your budget and use case.",
+      features: ["Mobile & laptop guidance", "Audio gear selection", "Accessory recommendations", "Tech trend insights"],
+      link: "https://topmate.io/the_sauron/1681422",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Coding Guidance",
+      icon: "👨‍💻",
+      shortDesc: "Personalized learning paths to master programming",
+      fullDesc: "1-on-1 mentorship and course recommendations to accelerate your coding journey and career growth.",
+      features: ["Personalized tuition", "Course selection", "Career roadmaps", "Interview preparation"],
+      link: "https://topmate.io/the_sauron/1693712",
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      title: "Video Editing",
+      icon: "🎬",
+      shortDesc: "Professional editing that makes your content stand out",
+      fullDesc: "Transform your raw footage into engaging content with seamless transitions and stunning visual effects.",
+      features: ["Content creator editing", "YouTube optimization", "Motion graphics", "Color grading"],
+      link: "https://topmate.io/the_sauron/1706299",
+      color: "from-amber-500 to-orange-500"
+    }
+  ];
 
   useEffect(() => {
-    const observer = new window.IntersectionObserver(
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const index = animatedRefs.current.findIndex(ref => ref === entry.target);
           if (entry.isIntersecting) {
-            // Element enters viewport
-            setTimeout(() => {
-              entry.target.classList.add('scale-100', 'opacity-100');
-              entry.target.classList.remove('scale-90', 'opacity-0', 'translate-y-10');
-            }, index * 100); // 200ms delay between each element
-          } else {
-            // Element leaves viewport - reset animation
-            entry.target.classList.remove('scale-100', 'opacity-100');
-            entry.target.classList.add('scale-90', 'opacity-0', 'translate-y-10');
+            entry.target.classList.add('animate-fade-in');
           }
         });
       },
-      { 
-        threshold: 0.2, // Increased threshold for better trigger points
-        rootMargin: '-50px 0px -50px 0px' // Adjusted margins for smoother triggering
-      }
+      { threshold: 0.1 }
     );
-    animatedRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-    return () => observer.disconnect();
+
+    if (containerRef.current) {
+      const elements = containerRef.current.querySelectorAll('.service-item, .section-title');
+      elements.forEach(el => observer.observe(el));
+    }
+
+    // Parallax effect
+    const handleScroll = () => {
+      if (parallaxRef.current) {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = parallaxRef.current.querySelectorAll('.parallax-element');
+        
+        parallaxElements.forEach((element, index) => {
+          const speed = 0.05 + (index * 0.05);
+          const yPos = -(scrolled * speed);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
-    <div id="services-section" className="text-white pt-20 pb-40 p-8 min-h-screen">
-      <div className="max-w-6xl mx-auto">
-        <h1
-          ref={el => (animatedRefs.current[0] = el)}
-          className="transition-all duration-1000 ease-out will-change-transform scale-90 opacity-0 translate-y-10 md:text-4xl text-3xl font-bold text-center mb-6 text-red-500"
-        >
-          What I Can Do For You
-        </h1>
-        <p
-          ref={el => (animatedRefs.current[1] = el)}
-          className="transition-all duration-1000 ease-out will-change-transform scale-90 opacity-0 translate-y-10 md:text-xl text-center mb-12 text-white md:pb-5"
-        >
-          I offer comprehensive digital solutions to help your business thrive in the digital landscape.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-24 md:gap-y-12">
-          {/* UI/UX Design Section */}
-          {/* <div
-            ref={el => (animatedRefs.current[2] = el)}
-            className="transition-all duration-1000 ease-out will-change-transform scale-90 opacity-0 translate-y-10 bg-black p-6 rounded-lg hover:scale-105 hover:shadow-xl"
-          >
-            <h2 className="text-2xl font-bold mb-4 text-red-500">UI/UX Design</h2>
-            <p className="text-white mb-4">
-              Creating intuitive and beautiful user experiences that convert visitors into customers.
-            </p>
-            <ul className="list-disc list-inside text-white">
-              <li>User-centered design approach</li>
-              <li>Wireframing & prototyping</li>
-              <li>Design systems & style guides</li>
-              <li>Usability testing & optimization</li>
-            </ul>
-            <div className="mt-8">
+    <div id="services-section" className="relative py-20 px-4 min-h-screen bg-gradient-to-b from-neutral-900 to-black overflow-hidden" ref={parallaxRef}>
+      {/* Parallax background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="parallax-element absolute -top-20 -left-20 w-80 h-80 bg-red-500/10 rounded-full blur-3xl"></div>
+        <div className="parallax-element absolute -bottom-20 -right-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" style={{transition: 'transform 0.1s ease-out'}}></div>
+        <div className="parallax-element absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" style={{transition: 'transform 0.1s ease-out'}}></div>
+      </div>
+
+      {/* Floating particles for parallax effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={i}
+            className="parallax-element absolute rounded-full bg-gradient-to-r from-red-400/20 to-rose-400/20"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 20 + 5}px`,
+              height: `${Math.random() * 20 + 5}px`,
+              transition: 'transform 0.1s ease-out',
+              animation: `pulse ${Math.random() * 4 + 3}s infinite alternate`
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10" ref={containerRef}>
+        {/* Section Header */}
+        <div className="text-center mb-16 section-title opacity-0">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-red-400 to-rose-400 bg-clip-text text-transparent">
+            Services
+          </h1>
+          <p className="text-xl text-neutral-300 max-w-2xl mx-auto">
+            Comprehensive digital solutions to help you thrive
+          </p>
+        </div>
+
+        {/* Services Tabs */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {services.map((service, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(index)}
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                activeTab === index
+                  ? `bg-gradient-to-r ${service.color} text-white shadow-lg`
+                  : "bg-neutral-800 text-neutral-300 hover:bg-neutral-700"
+              }`}
+            >
+              <span className="mr-2">{service.icon}</span>
+              {service.title}
+            </button>
+          ))}
+        </div>
+
+        {/* Active Service Display */}
+        <div className="bg-neutral-900/70 backdrop-blur-md rounded-2xl p-8 border border-neutral-800 shadow-xl mb-16 service-item opacity-0">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
+            <div className="flex-1">
+              <div className={`text-6xl mb-6 bg-gradient-to-r ${services[activeTab].color} bg-clip-text text-transparent`}>
+                {services[activeTab].icon}
+              </div>
+              <h2 className="text-3xl font-bold text-white mb-4">{services[activeTab].title}</h2>
+              <p className="text-xl text-neutral-300 mb-6">{services[activeTab].fullDesc}</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                {services[activeTab].features.map((feature, index) => (
+                  <div key={index} className="flex items-center">
+                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${services[activeTab].color} mr-3`}></div>
+                    <span className="text-neutral-400">{feature}</span>
+                  </div>
+                ))}
+              </div>
+              
               <a
-                className="hover:cursor-pointer"
-                target="__blank"
-                href="https://topmate.io/the_sauron/1693712?utm_source=public_profile&utm_campaign=the_sauron"
+                href={services[activeTab].link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center px-6 py-3 rounded-xl font-medium text-white bg-gradient-to-r ${services[activeTab].color} hover:shadow-lg transition-all duration-300`}
               >
-                <button className="hover:cursor-pointer w-full flex justify-center gap-2 gap-x-4 items-center shadow-xl text-lg bg-red-700 hover:border border-red-300 backdrop-blur-md lg:font-semibold isolation-auto before:absolute before:transition-all before:duration-700 before:-left-full before:hover:left-0 before:rounded-full before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-1 overflow-hidden rounded-full group">
-                  Book a Call
-                </button>
+                Book a Free Call
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
               </a>
             </div>
-          </div> */}
-          {/* Web Development Section */}
-          <div
-            ref={el => (animatedRefs.current[3] = el)}
-            className="transition-all duration-1000 ease-out will-change-transform scale-90 opacity-0 translate-y-10 bg-black p-6 rounded-lg hover:scale-105 hover:shadow-xl"
-          >
-            <h2 className="text-2xl font-bold mb-4 text-red-500">Web Development</h2>
-            <p className="text-white mb-4">
-              Building fast, scalable, and maintainable web applications using modern technologies.
-            </p>
-            <ul className="list-disc list-inside text-white">
-              <li>User-centered design approach</li>
-              <li>FullStack development</li>
-              <li>Portfolio Website</li>
-              <li>Website for your Business</li>
-              <li>Fully animated Webistes</li>
-            </ul>
-            <div className="mt-8">
-              <a
-                className="hover:cursor-pointer"
-                target="__blank"
-                href="https://topmate.io/the_sauron/1693712?utm_source=public_profile&utm_campaign=the_sauron"
-              >
-                <button className="hover:cursor-pointer w-full flex justify-center gap-2 gap-x-4 items-center shadow-xl text-lg bg-red-700 hover:border border-red-300 backdrop-blur-md lg:font-semibold isolation-auto before:absolute before:transition-all before:duration-700 before:-left-full before:hover:left-0 before:rounded-full before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-1 overflow-hidden rounded-full group">
-                  Book a Free Call
-                </button>
-              </a>
-            </div>
-          </div>
-          {/* Gadget Buying Suggestions Section */}
-          <div
-            ref={el => (animatedRefs.current[4] = el)}
-            className="transition-all duration-1000 ease-out will-change-transform scale-90 opacity-0 translate-y-10 bg-black p-6 rounded-lg hover:scale-105 hover:shadow-xl"
-          >
-            <h2 className="text-2xl font-bold mb-4 text-red-500">Gadget Buying Suggestions</h2>
-            <p className="text-white mb-4">
-              Get expert advice on buying mobile phones, laptops, headphones, mouse, and other electronic gadgets tailored to your needs and budget.
-            </p>
-            <ul className="list-disc list-inside text-white">
-              <li>Personalized recommendations for mobiles and laptops</li>
-              <li>Best headphones and audio gear for your use case</li>
-              <li>Choosing the right mouse and accessories</li>
-              <li>Suggestions for other electronic gadgets</li>
-              <li>Latest tech trends and deals</li>
-            </ul>
-            <div className="mt-8">
-              <a
-                className="hover:cursor-pointer"
-                target="__blank"
-                href="https://topmate.io/the_sauron/1681422?utm_source=public_profile&utm_campaign=the_sauron"
-              >
-                <button className="hover:cursor-pointer w-full flex justify-center gap-2 gap-x-4 items-center shadow-xl text-lg bg-red-700 hover:border border-red-300 backdrop-blur-md lg:font-semibold isolation-auto before:absolute before:transition-all before:duration-700 before:-left-full before:hover:left-0 before:rounded-full before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-1 overflow-hidden rounded-full group">
-                  Book a Free Call
-                </button>
-              </a>
-            </div>
-          </div>
-          {/* Coding Tuition & Course Advice Section */}
-          <div
-            ref={el => (animatedRefs.current[6] = el)}
-            className="transition-all duration-1000 ease-out will-change-transform scale-90 opacity-0 translate-y-10 bg-black p-6 rounded-lg hover:scale-105 hover:shadow-xl"
-          >
-            <h2 className="text-2xl font-bold mb-4 text-red-500">Coding Tuition & Course Advice</h2>
-            <p className="text-white mb-4">
-              Get guidance on learning to code, choosing the right courses, and finding the best instructors for your goals.
-            </p>
-            <ul className="list-disc list-inside text-white">
-              <li>1-on-1 coding tuition for beginners and advanced learners</li>
-              <li>Advice on which programming courses to take</li>
-              <li>Recommendations for trusted instructors and platforms</li>
-              <li>Roadmaps for web, mobile, and data science</li>
-              <li>Interview and career guidance</li>
-            </ul>
-            <div className="mt-8">
-              <a
-                className="hover:cursor-pointer"
-                target="__blank"
-                href="https://topmate.io/the_sauron/1693712?utm_source=public_profile&utm_campaign=the_sauron"
-              >
-                <button className="hover:cursor-pointer w-full flex justify-center gap-2 gap-x-4 items-center shadow-xl text-lg bg-red-700 hover:border border-red-300 backdrop-blur-md lg:font-semibold isolation-auto before:absolute before:transition-all before:duration-700 before:-left-full before:hover:left-0 before:rounded-full before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-1 overflow-hidden rounded-full group">
-                  Book a Free Call
-                </button>
-              </a>
-            </div>
-          </div>
-          {/* Video Editing Section */}
-          <div
-            ref={el => (animatedRefs.current[5] = el)}
-            className="transition-all duration-1000 ease-out will-change-transform scale-90 opacity-0 translate-y-10 bg-black p-6 rounded-lg hover:scale-105 hover:shadow-xl"
-          >
-            <h2 className="text-2xl font-bold mb-4 text-red-500">Video Editing</h2>
-            <p className="text-white mb-4">
-              Professional video editing services to bring your content to life with stunning visuals and seamless transitions.
-            </p>
-            <ul className="list-disc list-inside text-white">
-              <li>Content Creator Video Editing</li>
-              <li>YouTube Video Optimization</li>
-              <li>Motion Graphics & Effects</li>
-              <li>Color Grading & Correction</li>
-              <li>Promotional Videos & Ads</li>
-            </ul>
-            <div className="mt-8">
-              <a
-                className="hover:cursor-pointer"
-                target="__blank"
-                href="https://topmate.io/the_sauron/1706299?utm_source=public_profile&utm_campaign=the_sauron"
-              >
-                <button className="hover:cursor-pointer w-full flex justify-center gap-2 gap-x-4 items-center shadow-xl text-lg bg-red-700 hover:border border-red-300 backdrop-blur-md lg:font-semibold isolation-auto before:absolute before:transition-all before:duration-700 before:-left-full before:hover:left-0 before:rounded-full before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-1 overflow-hidden rounded-full group">
-                  Book a Free Call
-                </button>
-              </a>
+            
+            <div className="flex-1 bg-neutral-800/50 rounded-xl p-6 border border-neutral-700">
+              <h3 className="text-xl font-semibold text-white mb-4">What You'll Get</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1`}>✓</span>
+                  <span className="text-neutral-300">Personalized consultation to understand your needs</span>
+                </li>
+                <li className="flex items-start">
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1`}>✓</span>
+                  <span className="text-neutral-300">Tailored solutions that match your goals</span>
+                </li>
+                <li className="flex items-start">
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1`}>✓</span>
+                  <span className="text-neutral-300">Ongoing support and guidance</span>
+                </li>
+                <li className="flex items-start">
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1`}>✓</span>
+                  <span className="text-neutral-300">Results-driven approach</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+
+        {/* All Services Grid */}
+        <h2 className="text-3xl font-bold text-center text-white mb-8 section-title opacity-0">All Services</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {services.map((service, index) => (
+            <div key={index} className="service-item opacity-0 bg-neutral-900/70 backdrop-blur-md rounded-2xl p-6 border border-neutral-800 hover:border-neutral-600 transition-all duration-300">
+              <div className={`text-4xl mb-4 bg-gradient-to-r ${service.color} bg-clip-text text-transparent`}>
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
+              <p className="text-neutral-400 mb-4">{service.shortDesc}</p>
+              <a
+                href={service.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-sm font-medium text-white hover:underline"
+              >
+                Learn more
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+          0% { opacity: 0.2; }
+          100% { opacity: 0.6; }
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.8s ease forwards;
+        }
+        .service-item:nth-child(1) { animation-delay: 0.1s; }
+        .service-item:nth-child(2) { animation-delay: 0.2s; }
+        .service-item:nth-child(3) { animation-delay: 0.3s; }
+        .service-item:nth-child(4) { animation-delay: 0.4s; }
+        .section-title { animation-delay: 0.1s; }
+      `}</style>
     </div>
   );
 };
