@@ -1,3 +1,4 @@
+import { CodeXml, Keyboard, LaptopMinimal } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 
 export const Services = () => {
@@ -8,7 +9,7 @@ export const Services = () => {
   const services = [
     {
       title: "Web Development",
-      icon: "💻",
+      icon: <LaptopMinimal />,
       shortDesc: "Modern, responsive websites that convert visitors to customers",
       fullDesc: "Building fast, scalable web applications with cutting-edge technologies tailored to your business needs.",
       features: ["User-centered design", "FullStack development", "Business websites", "Animated experiences"],
@@ -17,30 +18,21 @@ export const Services = () => {
     },
     {
       title: "Gadget Advice",
-      icon: "📱",
+      icon: <Keyboard />,
       shortDesc: "Expert gadget recommendations tailored to your needs",
-      fullDesc: "Get personalized advice on phones, laptops, headphones, and tech accessories that fit your budget and use case.",
+      fullDesc: "Personalized advice on phones, laptops and tech accessories that fit your budget and use case.",
       features: ["Mobile & laptop guidance", "Audio gear selection", "Accessory recommendations", "Tech trend insights"],
       link: "https://topmate.io/the_sauron/1681422",
       color: "from-blue-500 to-cyan-500"
     },
     {
       title: "Coding Guidance",
-      icon: "👨‍💻",
+      icon: <CodeXml />,
       shortDesc: "Personalized learning paths to master programming",
       fullDesc: "1-on-1 mentorship and course recommendations to accelerate your coding journey and career growth.",
       features: ["Personalized tuition", "Course selection", "Career roadmaps", "Interview preparation"],
       link: "https://topmate.io/the_sauron/1693712",
       color: "from-purple-500 to-pink-500"
-    },
-    {
-      title: "Video Editing",
-      icon: "🎬",
-      shortDesc: "Professional editing that makes your content stand out",
-      fullDesc: "Transform your raw footage into engaging content with seamless transitions and stunning visual effects.",
-      features: ["Content creator editing", "YouTube optimization", "Motion graphics", "Color grading"],
-      link: "https://topmate.io/the_sauron/1706299",
-      color: "from-amber-500 to-orange-500"
     }
   ];
 
@@ -110,7 +102,7 @@ export const Services = () => {
             <button
               key={index}
               onClick={() => setActiveTab(index)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-3 flex  rounded-full font-medium transition-all duration-300 ${
                 activeTab === index
                   ? `bg-gradient-to-r ${service.color} text-white shadow-lg`
                   : "bg-neutral-800 text-neutral-300 hover:bg-neutral-700"
@@ -155,7 +147,7 @@ export const Services = () => {
               </a>
             </div>
             
-            {/* Right Content - What You'll Get - Now properly aligned */}
+            {/* Right Content - What You'll Get */}
             <div className="flex-1 bg-neutral-800/50 rounded-xl p-6 border border-neutral-700 flex flex-col">
               <h3 className="text-xl font-semibold text-white mb-4">What You'll Get</h3>
               <ul className="space-y-3 flex-1">

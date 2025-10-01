@@ -104,7 +104,7 @@ export default function Hero({
 
             {/* Main heading */}
             <h1
-              className={`text-5xl md:text-7xl font-bold text-white mb-6 transition-all duration-1000 ${
+              className={`text-5xl md:text-5xl font-bold text-white mb-6 transition-all duration-1000 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -134,14 +134,28 @@ export default function Hero({
                   : "opacity-0 translate-y-8"
               }`}
             >
-              <p className="inline-block px-6 py-4 text-lg text-neutral-300 bg-black/30 backdrop-blur rounded-xl border border-white/10 transition-all duration-300 hover:bg-white/5">
+              <p className="inline-block px-6 py-4 text-base text-neutral-300 bg-black/30 backdrop-blur rounded-xl border border-white/10 transition-all duration-300 hover:bg-white/5">
                 {subtitle}
               </p>
             </div>
 
-            {/* CTA Buttons */}
+           
+          </div>
+        </div>
+      </div>
+
+      {/* Corousal section */}
+      <div
+        className={`flex justify-center w-full mt-6 mb-6 transition-all duration-1000 delay-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}
+      >
+        <Corousal  />
+      </div>
+
+       {/* CTA Buttons */}
             <div
-              className={`flex flex-col sm:flex-row gap-4 justify-center mt-12 transition-all duration-1000 delay-700 ${
+              className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-700 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -160,18 +174,6 @@ export default function Hero({
                 Get in Touch
               </a>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Corousal section */}
-      <div
-        className={`flex justify-center w-full mt-12 mb-16 transition-all duration-1000 delay-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
-      >
-        <Corousal speedSec={20} />
-      </div>
 
       {/* Scroll indicator */}
       <div

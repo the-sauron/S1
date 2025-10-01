@@ -2,6 +2,7 @@ import React from 'react';
 import { FaInstagram, FaYoutube, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { FiMail, FiHeart } from 'react-icons/fi';
 
+
 export const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-neutral-900 to-black text-white py-16 border-t border-white/10">
@@ -16,7 +17,7 @@ export const Footer = () => {
                   <span className="text-white font-bold text-lg">TS</span>
                 </div>
               </div>
-              <span className="text-white font-bold text-2xl bg-gradient-to-r from-red-400 to-rose-400 bg-clip-text text-transparent">
+              <span className="text-white font-bold text-2xl bg-gradient-to-r from-red-400 to-rose-400 bg-clip-text">
                 the Sauron
               </span>
             </div>
@@ -55,7 +56,6 @@ export const Footer = () => {
             </h3>
             <ul className="space-y-3">
               {[
-                { href: "https://topmate.io/the_sauron/1706299", label: "Video Editing" },
                 { href: "https://topmate.io/the_sauron/1681422", label: "Smartphone Buying Guide" },
                 { href: "https://topmate.io/the_sauron/1681422", label: "Laptop & Gadget Suggestions" },
                 { href: "https://topmate.io/the_sauron/1693712", label: "Coding Tuition & Guidance" }

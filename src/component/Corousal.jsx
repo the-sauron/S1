@@ -11,7 +11,7 @@ const TITLES = [
   "Video Editor",
 ];
 
-export const Corousal = ({ pxPerSec = 60, direction = "rtl" }) => {
+export const Corousal = ({ pxPerSec = 120, direction = "rtl" }) => {
   const [paused, setPaused] = useState(false);
   const trackRef = useRef(null);
   const seg1Ref = useRef(null);
