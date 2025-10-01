@@ -93,24 +93,6 @@ export const Services = () => {
         <div className="parallax-element absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" style={{transition: 'transform 0.1s ease-out'}}></div>
       </div>
 
-      {/* Floating particles for parallax effect */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="parallax-element absolute rounded-full bg-gradient-to-r from-red-400/20 to-rose-400/20"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              width: `${Math.random() * 20 + 5}px`,
-              height: `${Math.random() * 20 + 5}px`,
-              transition: 'transform 0.1s ease-out',
-              animation: `pulse ${Math.random() * 4 + 3}s infinite alternate`
-            }}
-          />
-        ))}
-      </div>
-
       <div className="max-w-6xl mx-auto relative z-10" ref={containerRef}>
         {/* Section Header */}
         <div className="text-center mb-16 section-title opacity-0">
@@ -140,15 +122,16 @@ export const Services = () => {
           ))}
         </div>
 
-        {/* Active Service Display */}
+        {/* Active Service Display - Fixed alignment */}
         <div className="bg-neutral-900/70 backdrop-blur-md rounded-2xl p-8 border border-neutral-800 shadow-xl mb-16 service-item opacity-0">
-          <div className="flex flex-col md:flex-row gap-8 items-start">
-            <div className="flex-1">
+          <div className="flex flex-col lg:flex-row gap-8 items-stretch"> {/* Changed to items-stretch */}
+            {/* Left Content - Service Details */}
+            <div className="flex-1 flex flex-col">
               <div className={`text-6xl mb-6 bg-gradient-to-r ${services[activeTab].color} bg-clip-text text-transparent`}>
                 {services[activeTab].icon}
               </div>
               <h2 className="text-3xl font-bold text-white mb-4">{services[activeTab].title}</h2>
-              <p className="text-xl text-neutral-300 mb-6">{services[activeTab].fullDesc}</p>
+              <p className="text-xl text-neutral-300 mb-6 flex-1">{services[activeTab].fullDesc}</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                 {services[activeTab].features.map((feature, index) => (
@@ -163,7 +146,7 @@ export const Services = () => {
                 href={services[activeTab].link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center px-6 py-3 rounded-xl font-medium text-white bg-gradient-to-r ${services[activeTab].color} hover:shadow-lg transition-all duration-300`}
+                className={`inline-flex items-center px-6 py-3 rounded-xl font-medium text-white bg-gradient-to-r ${services[activeTab].color} hover:shadow-lg transition-all duration-300 mt-auto`} 
               >
                 Book a Free Call
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,23 +155,24 @@ export const Services = () => {
               </a>
             </div>
             
-            <div className="flex-1 bg-neutral-800/50 rounded-xl p-6 border border-neutral-700">
+            {/* Right Content - What You'll Get - Now properly aligned */}
+            <div className="flex-1 bg-neutral-800/50 rounded-xl p-6 border border-neutral-700 flex flex-col">
               <h3 className="text-xl font-semibold text-white mb-4">What You'll Get</h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3 flex-1">
                 <li className="flex items-start">
-                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1`}>✓</span>
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1 flex-shrink-0`}>✓</span>
                   <span className="text-neutral-300">Personalized consultation to understand your needs</span>
                 </li>
                 <li className="flex items-start">
-                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1`}>✓</span>
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1 flex-shrink-0`}>✓</span>
                   <span className="text-neutral-300">Tailored solutions that match your goals</span>
                 </li>
                 <li className="flex items-start">
-                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1`}>✓</span>
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1 flex-shrink-0`}>✓</span>
                   <span className="text-neutral-300">Ongoing support and guidance</span>
                 </li>
                 <li className="flex items-start">
-                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1`}>✓</span>
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center bg-gradient-to-r ${services[activeTab].color} text-white text-xs mr-3 mt-1 flex-shrink-0`}>✓</span>
                   <span className="text-neutral-300">Results-driven approach</span>
                 </li>
               </ul>
