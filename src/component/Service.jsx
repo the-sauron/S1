@@ -119,9 +119,6 @@ export const Services = () => {
           <div className="flex flex-col lg:flex-row gap-8 items-stretch"> {/* Changed to items-stretch */}
             {/* Left Content - Service Details */}
             <div className="flex-1 flex flex-col">
-              <div className={`text-6xl mb-6 bg-gradient-to-r ${services[activeTab].color} bg-clip-text text-transparent`}>
-                {services[activeTab].icon}
-              </div>
               <h2 className="text-3xl font-bold text-white mb-4">{services[activeTab].title}</h2>
               <p className="text-xl text-neutral-300 mb-6 flex-1">{services[activeTab].fullDesc}</p>
               
@@ -177,10 +174,7 @@ export const Services = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, index) => (
             <div key={index} className="service-item opacity-0 bg-neutral-900/70 backdrop-blur-md rounded-2xl p-6 border border-neutral-800 hover:border-neutral-600 transition-all duration-300">
-              <div className={`text-4xl mb-4 bg-gradient-to-r ${service.color} bg-clip-text text-transparent`}>
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
+              <h3 className="text-xl font-bold text-red-500 mb-2">{service.title}</h3>
               <p className="text-neutral-400 mb-4">{service.shortDesc}</p>
               <a
                 href={service.link}

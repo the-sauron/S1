@@ -52,7 +52,7 @@ export default function Hero({
         <div className="absolute top-1/2 left-1/4 w-60 h-60 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-3000"></div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-20">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-[10px]">
         <div className="flex flex-col items-center">
           {/* Animated title word rotator */}
           {/* Dynamic Word Rotator */}
