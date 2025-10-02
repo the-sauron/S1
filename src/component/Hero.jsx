@@ -57,7 +57,7 @@ export default function Hero({
           {/* Animated title word rotator */}
           {/* Dynamic Word Rotator */}
           <div
-            className={`mb-12 transition-all duration-1000 ease-out ${
+            className={`mb-6 transition-all duration-1000 ease-out ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
@@ -92,7 +92,7 @@ export default function Hero({
           <div className="text-center max-w-3xl mx-auto">
             {/* Tagline badge */}
             <div
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-base font-medium mb-8 bg-white/5 backdrop-blur border border-white/10 text-white transition-all duration-700 ${
+              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-base font-medium mb-4 bg-white/5 backdrop-blur border border-white/10 text-white transition-all duration-700 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -104,7 +104,7 @@ export default function Hero({
 
             {/* Main heading */}
             <h1
-              className={`text-5xl md:text-5xl font-bold text-white mb-6 transition-all duration-1000 ${
+              className={`text-xl md:text-5xl font-bold text-white mb-6 transition-all duration-1000 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -115,7 +115,7 @@ export default function Hero({
 
             {/* Highlighted name */}
             <div
-              className={`my-6 text-5xl md:text-6xl font-extrabold transition-all duration-1000 delay-300 ${
+              className={`my-6  text-5xl md:text-6xl font-extrabold transition-all duration-1000 delay-300 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -138,42 +138,40 @@ export default function Hero({
                 {subtitle}
               </p>
             </div>
-
-           
           </div>
         </div>
       </div>
 
-      {/* Corousal section */}
+      {/* Corousal section - Moved above CTA buttons */}
       <div
-        className={`flex justify-center w-full mt-6 mb-6 transition-all duration-1000 delay-1000 ${
+        className={`flex justify-center w-full mt-6 mb-6 transition-all duration-1000 delay-700 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
         <Corousal  />
       </div>
 
-       {/* CTA Buttons */}
-            <div
-              className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-700 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-            >
-              <a
-                href="#services-section"
-                className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium transition-all duration-300 hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20"
-              >
-                Explore Services
-              </a>
-              <a
-                href="#about-section"
-                className="px-6 py-3 bg-transparent text-white border border-white/20 rounded-lg font-medium transition-all duration-300 hover:bg-white/10"
-              >
-                Get in Touch
-              </a>
-            </div>
+      {/* CTA Buttons - Now placed below Corousal */}
+      <div
+        className={`flex flex-row gap-3 justify-center mt-4 transition-all duration-1000 delay-1000 ${
+          isVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-8"
+        }`}
+      >
+        <a
+          href="#services-section"
+          className="w-[150px] px-4 py-3 bg-red-600 text-white rounded-lg font-medium transition-all duration-300 hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20 text-sm text-center"
+        >
+          Explore Services
+        </a>
+        <a
+          href="#about-section"
+          className="w-[150px] px-4 py-3 bg-transparent text-white border border-white/20 rounded-lg font-medium transition-all duration-300 hover:bg-white/10 text-sm text-center"
+        >
+          Get in Touch
+        </a>
+      </div>
 
       {/* Scroll indicator */}
       <div
